@@ -29,7 +29,9 @@ export default function Form({ fields, onSubmit, buttonText = "Enviar", styleFor
         <form onSubmit={handleSubmit} className={styleFormContainer}>
             {fields.map((fields) => (
                 <div key={fields.name} className={fields.className}>
-                    <label className="font-medium">{fields.label}</label>
+                    {fields.label && (
+                        <label className={fields.classNameLabel}>{fields.label}</label>
+                    )}
                     {fields.type === "textarea" ? (
                         <textarea
                             name={fields.name}
@@ -55,7 +57,7 @@ export default function Form({ fields, onSubmit, buttonText = "Enviar", styleFor
                             placeholder={fields.placeholder}
                             required={fields.required}
                             onChange={handleChange}
-                            className={fields.className}                        
+                            className={fields.classNameInput}                        
                         />
                     )}
                 </div>
