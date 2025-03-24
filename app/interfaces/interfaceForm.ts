@@ -3,7 +3,7 @@ interface Field {
     label: string;
     className?: string;
     type: "text" | "email" | "password" | "number" | "date" | "select" | "textarea" | "select";
-    options?: {value: string, label: string, className: string}[];
+    options?: {value: string, label: string, className?: string}[];
     placeholder?: string;
     required?: boolean;
 }
