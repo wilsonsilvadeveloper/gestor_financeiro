@@ -1,6 +1,7 @@
 const CreateNewAccount = async (data: Record<string, string | number | boolean>) => {
-    const response = await fetch('http://localhost:3001/users/create-account', {
+    const response = await fetch('http://localhost:3001/api/users/create-account', {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
