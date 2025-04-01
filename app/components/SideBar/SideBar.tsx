@@ -14,7 +14,7 @@ export default function SideBar() {
     };
 
     return (
-        <div className={`relative top-0 left-0 max-w-[200px] h-screen bg-[#ff9800] ${isOpen ? "w-full" : "w-[100px] max-w-[100px]"} transition-all duration-500`}>
+        <div className={`relative top-0 left-0 max-w-[120px] h-screen bg-[#ff9800] ${isOpen ? "w-full" : "w-[80px] max-w-[80px]"} transition-all duration-500`}>
             <Button onClick={toggleSidebar} className="w-full flex justify-center items-center p-4 cursor-pointer">
                 <Icon src={iconSideBar} w={25} h={25} className="" alt="toggle sidebar" />
             </Button>
