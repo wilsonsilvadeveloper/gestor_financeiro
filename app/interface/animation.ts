@@ -1,5 +1,5 @@
 export default interface AnimationProps {
-    data: string;
+    data: object;
     className?: string;
     loop?: boolean;
     autoplay?: boolean;
