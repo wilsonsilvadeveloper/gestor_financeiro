@@ -3,11 +3,13 @@ import { useState, useEffect } from "react"
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJs, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import { ChartData, ChartOptions } from "chart.js";
+import { DashboardData } from "@/app/interface/dashboard";
 
 ChartJs.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function Dashboard() {
-    const [data, setData] = useState<ChartData<'bar'>>({
+export default function Dashboard(data: DashboardData) {
+    const [isEmpty, setIsEmpty] = useState<boolean>(false);
+    const [chartData, setChartData] = useState<ChartData<'bar'>>({
         labels: [],
         datasets: []
     });
@@ -26,29 +28,37 @@ export default function Dashboard() {
     }
 
     useEffect(() => {
-        const fetchData = () => {
+        if(data && data.receitas && data.gastos && data.labels) {
             const chartData: ChartData<'bar'> = {
-                labels: ['January', 'February', 'March', 'April', 'May'], // Labels para os eixos X
-                datasets: [
-                    {
-                        label: 'Vendas Mensais',
-                        data: [65, 59, 80, 81, 56], // Dados para as barras
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor de fundo das barras
-                        borderColor: 'rgba(75, 192, 192, 1)', // Cor da borda das barras
-                        borderWidth: 1,
-                    },
-                ],
-            };
-
-            setData(chartData);
-        };
-
-        fetchData();
-    }, []);
+                labels: data.labels,
+                datasets: [{
+                    label: "Receitas",
+                    data: data.receitas as [],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor de fundo das barras
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                },
+                {
+                    label: "Despesas",
+                    data: data.gastos as [],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // Cor de fundo das barras
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                }],
+            }
+            setChartData(chartData);
+        } else {
+            setIsEmpty(true);
+        }
+    }, [data])
 
     return (
         <div className="w-full h-[400px] flex justify-center">
-            <Bar data={data} options={config_grafic}></Bar>
+            {isEmpty ? (
+                <div className="flex items-center justify-center w-full h-full">
+                    <p className="text-gray-500">Não há dados disponíveis para exibir.</p>
+                </div>
+            ) : (
+                <Bar data={chartData} options={config_grafic}></Bar>
+            )}
         </div>
     )
 }
