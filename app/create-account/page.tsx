@@ -2,6 +2,8 @@
 import { useRouter } from "next/navigation";
 import Form from "../components/Form/Form";
 import Field from "../interfaces/interfaceForm";
+import Animation from "../components/Animation/Animation";
+import AnimationData from "../../public/animations/gafrico_linha.json";
 import CreateNewAccount from "../service/create-account";
 import { Poppins } from "next/font/google";
 
@@ -30,7 +32,6 @@ export default function CreateAccountPage() {
           router.push("/dashboard");
         } else {
           console.log("Erro ao criar conta!");
-          //console.error(creatingAccount.message);
         }
       };  
     
@@ -38,13 +39,16 @@ export default function CreateAccountPage() {
         <div className={`${poppins.className} p-6 bg-[#fafdff]  min-h-screen text-[#0a0a0a] flex flex-col justify-center items-center`}>
           <h1 className="text-xl font-bold mb-2 text-[#795300]">Bem vindo(a) ao Sistema de Gestão Financeira Pessoal</h1>
           <p className="text-[#795300] font-[500] mb-2">Acompanhe suas finanças de forma fácil e interativa, crie sua conta e começe já!</p>
-            <Form 
-                fields={fields}
-                onSubmit={handleSubmit}
-                buttonText="Criar Conta"
-                styleFormContainer="w-full min-w-[500px] max-w-[50%] flex flex-col text-black bg-[#efb810] p-4 rounded-lg"
-                styleButtonSubmit="w-[100%] min-w-[200px] h-[40px] mt-4 rounded-lg cursor-pointer text-center bg-[#c39200] text-white text-[18px] font-[400]"
-            />
+            <div className="flex flex-row mt-4">
+              <Animation  data={AnimationData} />
+              <Form 
+                  fields={fields}
+                  onSubmit={handleSubmit}
+                  buttonText="Criar Conta"
+                  styleFormContainer="w-full min-w-[500px] max-w-[50%] flex flex-col text-black bg-[#efb810] p-4 rounded-lg"
+                  styleButtonSubmit="w-[100%] min-w-[200px] h-[40px] mt-4 rounded-lg cursor-pointer text-center bg-[#c39200] text-white text-[18px] font-[400]"
+              />
+            </div>
         </div>
       );
 }
