@@ -19,9 +19,9 @@ export default function SideBar() {
                 <Icon src={iconSideBar} w={25} h={25} className="" alt="toggle sidebar" />
             </Button>
             <nav className="flex flex-col gap-2">
-                <a href="/dashboard" className={`w-full h-auto flex justify-center py-2 px-4 ${isOpen ? "hover:bg-gray-700" : ""} duration-500`}>{isOpen ? "Dashboard" : <Icon src={IconDashboard} alt="dashboard" className="" w={40} />}</a>
-                <a href="/gastos" className={`w-full h-auto flex justify-center py-2 px-4 ${isOpen ? "hover:bg-gray-700" : ""} duration-500`}>{isOpen ? "Gastos" : <Icon src={IconGastos} alt="gastos" className="" w={40} />}</a>
-                <a href="/receitas" className={`w-full h-auto flex justify-center py-2 px-4 ${isOpen ? "hover:bg-gray-700" : ""} duration-500`}>{isOpen ? "Receitas" : <Icon src={IconReceitas} alt="receitas" className="" w={40} />}</a>
+                <a href="/dashboard" className={`w-full h-auto flex py-2 px-4 ${isOpen ? "hover:bg-gray-700 justify-items-start"  : "justify-center"} duration-500`}>{isOpen ? "Dashboard" : <Icon src={IconDashboard} alt="dashboard" className="" w={40} />}</a>
+                <a href="/gastos" className={`w-full h-auto flex py-2 px-4 ${isOpen ? "hover:bg-gray-700 justify-items-start"  : "justify-center"} duration-500`}>{isOpen ? "Gastos" : <Icon src={IconGastos} alt="gastos" className="" w={40} />}</a>
+                <a href="/receitas" className={`w-full h-auto flex py-2 px-4 ${isOpen ? "hover:bg-gray-700 justify-items-start"  : "justify-center"} duration-500`}>{isOpen ? "Receitas" : <Icon src={IconReceitas} alt="receitas" className="" w={40} />}</a>
             </nav>
         </div>
     );
