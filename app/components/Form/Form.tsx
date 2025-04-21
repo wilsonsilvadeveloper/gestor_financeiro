@@ -6,13 +6,13 @@ interface AdaptiveFormProps {
     fields: Field[];
     styleFormContainer?: string;
     styleButtonSubmit?: string;
-    onSubmit: (formData: Record<string, string | number>) => void;
+    onSubmit: (formData: Record<string, string | number | boolean>) => void;
     buttonText?: string;
+    buttonChildren?: React.ReactNode;
 }
+export default function Form({ fields, onSubmit, buttonChildren, buttonText = "Enviar", styleFormContainer, styleButtonSubmit} : AdaptiveFormProps) {
 
-export default function Form({ fields, onSubmit, buttonText = "Enviar", styleFormContainer, styleButtonSubmit} : AdaptiveFormProps) {
-
-    const [formData, setFormData] = useState<Record<string, string | number>>(
+    const [formData, setFormData] = useState<Record<string, string | number | boolean>>(
         fields.reduce((acc, field) => ({...acc, [field.name]: ""}), {})
     )
 
@@ -35,15 +35,15 @@ export default function Form({ fields, onSubmit, buttonText = "Enviar", styleFor
                     {fields.type === "textarea" ? (
                         <textarea
                             name={fields.name}
-                            value={formData[fields.name]}
+                            value={formData[fields.name]?.toString() || ""}
                             onChange={handleChange}
                             placeholder={fields.placeholder}
                             required={fields.required}
                             className={fields.className}
                         />
                     ) : fields.type === "select" && fields.options ? (
-                        <select name={fields.name} required={fields.required} onChange={handleChange} className={fields.className}>
-                            <option value="">Selecione</option>
+                        <select name={fields.name} required={fields.required} onChange={handleChange} className={fields.classNameSelect}>
+                            <option disabled value="">Selecione</option>
                             {fields.options.map((option)=> (
                                 <option className={option.className} key={option.value} value={option.value}>
                                     {option.label}
@@ -56,14 +56,24 @@ export default function Form({ fields, onSubmit, buttonText = "Enviar", styleFor
                             name={fields.name}
                             placeholder={fields.placeholder}
                             required={fields.required}
-                            onChange={handleChange}
+                            value={formData[fields.name]?.toString() ?? ''}
+                            onChange={(e)=> {
+                                if(fields.onChange) {
+                                    const newValue = fields.onChange(e);
+                                    if(newValue !== undefined){
+                                        setFormData({...formData, [e.target.name]: newValue})
+                                    }
+                                } else {
+                                    handleChange(e)
+                                }
+                            }}
                             className={fields.classNameInput}                        
                         />
                     )}
                 </div>
             ))}
             <button type="submit" className={styleButtonSubmit}>
-                {buttonText}
+                {buttonChildren ? buttonChildren : buttonText}
             </button>
         </form>
     )
