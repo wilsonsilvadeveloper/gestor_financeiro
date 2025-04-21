@@ -7,8 +7,8 @@ export default function Animation(Animation: AnimationProps) {
             animationData={Animation.data}
             loop={Animation.loop || true}
             autoplay={Animation.autoplay || true}
-            width={Animation.width || "100%"}
-            height={Animation.height || "100%"}
+            width={Animation.width}
+            height={Animation.height}
             className={Animation.className || ""}
         />
     )
