@@ -16,6 +16,7 @@ pipeline {
       steps {
         bat '''
           echo Pipeline está rodando corretamente.
+          where node
           node -v
           npm -v
           node -p "process.arch"
@@ -24,24 +25,20 @@ pipeline {
       }
     }
 
-    stage('Instalar Dependências') {
-      steps {
-        bat 'npm install'
-      }
-    }
-
     stage('Build do Projeto') {
       steps {
+        bat 'rd /s /q node_modules'
+        bat 'del /f /q package-lock.json'
+        bat 'npm cache clean --force'
+        bat 'npm install --timeout=60000'
+        bat 'npm rebuild'
         bat 'npm run build'
       }
     }
 
     stage('Verificar Branch') {
       steps {
-        bat '''
-          for /f %%i in ('git rev-parse --abbrev-ref HEAD') do set BRANCH=%%i
-          echo Branch atual: %BRANCH%
-        '''
+        bat 'git rev-parse --abbrev-ref HEAD'
       }
     }
 
@@ -55,7 +52,8 @@ pipeline {
             git config user.name "wilsonsilvadeveloper"
             git config user.email "wilsonoficial.com@gmail.com"
             git fetch origin
-            git checkout main
+            git checkout -B main origin/main
+            git fetch origin development
             git merge origin/development --no-edit
             git push origin main
           '''
