@@ -57,7 +57,11 @@
           <div className="flex flex-row gap-4 w-full min-h-screen">
             <SideBar />
             <div className="flex items-center justify-center w-full h-screen">
+            {data ? (
               <Dashboard data={data} />
+            ) : (
+              <p>Erro: dados indisponíveis</p>
+            )}
             </div>
           </div>
         )}
