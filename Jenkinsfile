@@ -18,13 +18,13 @@ pipeline {
 
     stage('Instalar Dependências') {
       steps {
-        sh 'npm install'
+        bat 'npm install'
       }
     }
 
     stage('Build do Projeto') {
       steps {
-        sh 'npm run build'
+        bat 'npm run build'
       }
     }
 
@@ -34,7 +34,7 @@ pipeline {
       }
       steps {
         sshagent (credentials: ['ssh-github']) {
-          sh '''
+          bat '''
             git config user.name "wilsonsilvadeveloper"
             git config user.email "wilsonoficial.com@gmail.com"
             git fetch origin
