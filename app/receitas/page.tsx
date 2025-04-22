@@ -8,15 +8,13 @@ import Modal from "../components/Modal/Modal";
 import Form from "../components/Form/Form";
 import Field from "../interfaces/interfaceForm";
 
-interface ReceitasProps {
-    data: {
-        receitas: number[];
-        labels: string[];
-        categorias: string[];
-    }
-}
+export default function Receitas() {
 
-export default function Receitas({ data } : ReceitasProps) {
+    const [data, setData] = useState({
+        receitas: [],
+        labels: [],
+        categorias: [],
+    });
 
     const [dataIsValid, setDataIsValid] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false); 
@@ -33,6 +31,26 @@ export default function Receitas({ data } : ReceitasProps) {
             setDataIsValid(false);
         }
     }, [data])
+
+    useEffect(()=> {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://localhost:3001/api/users/receitas", {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                });
+                const jsonData = await response.json();
+                setData(jsonData);
+            } catch (error) {
+                console.error("Erro ao buscar dados:", error);
+            }
+        };
+        fetchData();
+    },[])
 
     const somenteNumeros = (valor: string) => {
         return valor.replace(/\D/g, "");
