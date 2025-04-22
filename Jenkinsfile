@@ -11,31 +11,22 @@ pipeline {
     SHARP_IGNORE_GLOBAL_LIBVIPS = 'true'
   }
 
-  stage('Debug') {
-    steps {
-      bat '''
-        echo Pipeline está rodando corretamente.
-        node -v
-        npm -v
-        node -p "process.arch"
-        node -p "process.platform"
-      '''
-    }
-  }
-
-
-    stage('Preparar Ambiente') {
+  stages {
+    stage('Debug') {
       steps {
         bat '''
-          IF EXIST node_modules RMDIR /S /Q node_modules
-          IF EXIST package-lock.json DEL /F /Q package-lock.json
+          echo Pipeline está rodando corretamente.
+          node -v
+          npm -v
+          node -p "process.arch"
+          node -p "process.platform"
         '''
       }
     }
 
     stage('Instalar Dependências') {
       steps {
-        bat 'npm install --cpu=wasm32 sharp'
+        bat 'npm install'
       }
     }
 
