@@ -1,11 +1,13 @@
 "use client";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import Form from "../components/Form/Form";
 import Field from "../interfaces/interfaceForm";
-import Animation from "../components/Animation/Animation";
 import AnimationData from "../../public/animations/gafrico_linha.json";
 import CreateNewAccount from "../service/create-account";
 import { Poppins } from "next/font/google";
+
+const Animation = dynamic(()=> import("../components/Animation/Animation"), {ssr: false});
 
 const poppins = Poppins({
     weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],

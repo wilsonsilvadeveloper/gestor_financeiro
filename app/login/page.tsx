@@ -1,12 +1,14 @@
 "use client";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Animation from "../components/Animation/Animation";
 import AnimationData from "../../public/animations/gafrico_linha.json"
 import LoadingAnimation from "../../public/animations/loading2.json"
 import Form from "../components/Form/Form";
 import Field from "../interfaces/interfaceForm";
 import Login from "../service/login";
+
+const Animation = dynamic(()=> import("../components/Animation/Animation"), {ssr: false});
 
 export default function LoginPage() {
     const router = useRouter();
