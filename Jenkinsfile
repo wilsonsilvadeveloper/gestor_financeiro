@@ -28,6 +28,12 @@ pipeline {
       }
     }
 
+    stage('Verificando a branch atual') {
+      steps {
+        echo "Branch atual: $(git rev-parse --abbrev-ref HEAD)"
+      }
+    }
+
     stage('Merge para main') {
       when {
         branch 'development'
