@@ -7,18 +7,35 @@ pipeline {
 
   environment {
     GIT_REPO = 'https://github.com/wilsonsilvadeveloper/gestor_financeiro.git'
+    NEXT_DISABLE_SWC_NATIVE = 'true'
+    SHARP_IGNORE_GLOBAL_LIBVIPS = 'true'
   }
 
-  stages {
-    stage('Debug') {
+  stage('Debug') {
+    steps {
+      bat '''
+        echo Pipeline está rodando corretamente.
+        node -v
+        npm -v
+        node -p "process.arch"
+        node -p "process.platform"
+      '''
+    }
+  }
+
+
+    stage('Preparar Ambiente') {
       steps {
-        echo 'Pipeline está rodando corretamente.'
+        bat '''
+          IF EXIST node_modules RMDIR /S /Q node_modules
+          IF EXIST package-lock.json DEL /F /Q package-lock.json
+        '''
       }
     }
 
     stage('Instalar Dependências') {
       steps {
-        bat 'npm install'
+        bat 'npm install --cpu=wasm32 sharp'
       }
     }
 
@@ -33,10 +50,9 @@ pipeline {
         bat '''
           for /f %%i in ('git rev-parse --abbrev-ref HEAD') do set BRANCH=%%i
           echo Branch atual: %BRANCH%
-          '''
+        '''
       }
     }
-
 
     stage('Merge para main') {
       when {
