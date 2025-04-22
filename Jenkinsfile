@@ -9,6 +9,12 @@ pipeline {
     GIT_REPO = 'https://github.com/wilsonsilvadeveloper/gestor_financeiro.git'
   }
 
+  stage('Debug') {
+    steps {
+      echo 'Pipeline está rodando corretamente.'
+    }
+}
+
   stages {
     stage('Instalar Dependências') {
       steps {
@@ -27,13 +33,16 @@ pipeline {
         branch 'development'
       }
       steps {
-        sh '''
-        git config user.name "wilsonsilvadeveloper"
-        git config user.email "wilsonoficial.com@gmail.com"
-        git checkout main
-        git merge origin/development --no-ff -m "Merge automático via Jenkins"
-        git push origin main
-        '''
+        sshagent (credentials: ['ssh-github']) {
+          sh '''
+            git config user.name "wilsonsilvadeveloper"
+            git config user.email "wilsonoficial.com@gmail.com"
+            git fetch origin
+            git checkout main
+            git merge origin/development --no-edit
+            git push origin main
+          '''
+        }
       }
     }
   }
