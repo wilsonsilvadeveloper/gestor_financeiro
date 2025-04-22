@@ -28,14 +28,14 @@ pipeline {
       }
     }
 
-   stages {
+    stages {
       stage('Verificar Branch') {
-          steps {
-              bat '''
-                  for /f %%i in ('git rev-parse --abbrev-ref HEAD') do set BRANCH=%%i
-                  echo Branch atual: %BRANCH%
-              '''
-          }
+        steps {
+          bat '''
+            for /f %%i in ('git rev-parse --abbrev-ref HEAD') do set BRANCH=%%i
+            echo Branch atual: %BRANCH%
+            '''
+        }
       }
     }
 
