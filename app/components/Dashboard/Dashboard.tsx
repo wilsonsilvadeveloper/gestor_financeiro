@@ -7,7 +7,11 @@ import { DashboardData } from "@/app/interface/dashboard";
 
 ChartJs.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function Dashboard(data: DashboardData) {
+interface DashboardProps {
+    data: DashboardData;
+}
+
+export default function Dashboard({data} : DashboardProps) {
     const [isEmpty, setIsEmpty] = useState<boolean>(false);
     const [chartData, setChartData] = useState<ChartData<'bar'>>({
         labels: [],
@@ -33,13 +37,13 @@ export default function Dashboard(data: DashboardData) {
                 labels: data.labels,
                 datasets: [{
                     label: "Receitas",
-                    data: data.receitas as [],
+                    data: data.receitas,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor de fundo das barras
                     borderColor: 'rgba(75, 192, 192, 1)',
                 },
                 {
                     label: "Despesas",
-                    data: data.gastos as [],
+                    data: data.gastos,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)', // Cor de fundo das barras
                     borderColor: 'rgba(255, 99, 132, 1)',
                 }],
