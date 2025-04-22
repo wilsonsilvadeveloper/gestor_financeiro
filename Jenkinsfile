@@ -9,13 +9,13 @@ pipeline {
     GIT_REPO = 'https://github.com/wilsonsilvadeveloper/gestor_financeiro.git'
   }
 
-  stage('Debug') {
-    steps {
-      echo 'Pipeline está rodando corretamente.'
-    }
-}
-
   stages {
+    stage('Debug') {
+      steps {
+        echo 'Pipeline está rodando corretamente.'
+      }
+    }
+
     stage('Instalar Dependências') {
       steps {
         sh 'npm install'
