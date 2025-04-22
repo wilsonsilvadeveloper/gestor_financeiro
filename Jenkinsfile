@@ -1,44 +1,40 @@
 pipeline {
   agent any
 
-  environment {
-    NODE_ENV = 'production'
+  tools {
+    nodejs 'NodeJS-22'
   }
 
-  tools {
-    nodejs 'NodeJS-22' // ou o nome da instalação do Node configurado no Jenkins
+  environment {
+    GIT_REPO = 'https://github.com/wilsonsilvadeveloper/gestor_financeiro.git'
   }
 
   stages {
-    stage('Clonar repositório') {
-      steps {
-        git 'https://github.com/wilsonsilvadeveloper/gestor_financeiro'
-      }
-    }
-
-    stage('Instalar dependências') {
+    stage('Instalar Dependências') {
       steps {
         sh 'npm install'
       }
     }
 
-    stage('Build do projeto') {
+    stage('Build do Projeto') {
       steps {
         sh 'npm run build'
       }
     }
 
-    withCredentials([string(credentialsId: 'vercel-deplou-hook', variable: 'VERCEL_HOOK_URL')]) {
-        sh 'curl -X POST "$VERCEL_HOOK_URL"'
-    }
-  }
-
-  post {
-    success {
-      echo 'Build e deploy concluídos com sucesso!'
-    }
-    failure {
-      echo 'Falha no pipeline.'
+    stage('Merge para main') {
+      when {
+        branch 'development'
+      }
+      steps {
+        sh '''
+        git config user.name "wilsonsilvadeveloper"
+        git config user.email "wilsonoficial.com@gmail.com"
+        git checkout main
+        git merge origin/development --no-ff -m "Merge automático via Jenkins"
+        git push origin main
+        '''
+      }
     }
   }
 }
