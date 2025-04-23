@@ -1,5 +1,6 @@
 const CreateNewAccount = async (data: Record<string, string | number | boolean>) => {
-    const response = await fetch('http://localhost:3001/api/users/create-account', {
+    const url = process.env.NODE_ENV === 'production' ? process.env.BACKEND_URL : 'http://localhost:3001'
+    const response = await fetch(`${url}/api/users/create-account`, {
         method: 'POST',
         credentials: 'include',
         headers: {
