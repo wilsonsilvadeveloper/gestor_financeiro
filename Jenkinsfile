@@ -52,12 +52,14 @@ pipeline {
             git config user.name "wilsonsilvadeveloper"
             git config user.email "wilsonoficial.com@gmail.com"
             git remote set-url origin https://%GIT_USER%:%GIT_TOKEN%@github.com/wilsonsilvadeveloper/gestor_financeiro.git
+            git stash --include-untracked
             git fetch origin
-            git checkout -B main origin/main
+            git checkout -B main origin/main || git checkout -b main
             git fetch origin development
             git merge origin/development --no-edit
             git push origin main
-          '''
+            git stash pop || true
+            '''
         }
       }
     }
