@@ -47,10 +47,11 @@ pipeline {
         branch 'development'
       }
       steps {
-        sshagent (credentials: ['ssh-github']) {
+        withCredentials([usernamePassword(credentialsId: 'token_git', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
           bat '''
             git config user.name "wilsonsilvadeveloper"
             git config user.email "wilsonoficial.com@gmail.com"
+            git remote set-url origin https://%GIT_USER%:%GIT_TOKEN%@github.com/wilsonsilvadeveloper/gestor_financeiro.git
             git fetch origin
             git checkout -B main origin/main
             git fetch origin development
