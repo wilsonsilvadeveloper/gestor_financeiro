@@ -83,7 +83,7 @@ export default function Receitas() {
             type: "text",
             required: true,
             className: "flex flex-col",
-            classNameInput: "bg-[#c39200] mb-4 rounded-lg text-white pl-2 h-[30px] placeholder-white font-[300]",
+            classNameInput: "bg-[#ff9800] mb-4 rounded-lg text-white pl-2 h-[30px] placeholder-white font-[300]",
             classNameLabel: "ml-2 text-[#795300] font-[400]",
         },
         {
@@ -95,7 +95,7 @@ export default function Receitas() {
             },
             required: true,
             className: "flex flex-col",
-            classNameInput: "bg-[#c39200] mb-4 rounded-lg text-white pl-2 h-[30px] placeholder-white font-[300]",
+            classNameInput: "bg-[#ff9800] mb-4 rounded-lg text-white pl-2 h-[30px] placeholder-white font-[300]",
             classNameLabel: "ml-2 text-[#795300] font-[400]",
         },
         {
@@ -105,8 +105,8 @@ export default function Receitas() {
             options: categorias.map((categoria) => ({ label: categoria.label, value: categoria.value, className: "bg-[#c39200] mb-4 rounded-lg text-blue pl-2 h-[30px] placeholder-white font-[300]"})),
             required: true,
             className: "flex flex-col",
-            classNameSelect: "bg-[#c39200] mb-4 rounded-lg text-white pl-2 h-[30px] placeholder-white font-[300]",
-            classNameInput: "bg-[#c39200] mb-4 rounded-lg text-white pl-2 h-[30px] placeholder-white font-[300]",
+            classNameSelect: "bg-[#ff9800] mb-4 rounded-lg text-white pl-2 h-[30px] placeholder-white font-[300]",
+            classNameInput: "bg-[#ff9800] mb-4 rounded-lg text-white pl-2 h-[30px] placeholder-white font-[300]",
             classNameLabel: "ml-2 text-[#795300] font-[400]",
         },
         {
@@ -115,7 +115,7 @@ export default function Receitas() {
             type: "text",
             required: true,
             className: "flex flex-col",
-            classNameInput: "bg-[#c39200] mt-2 rounded-lg text-white pl-2 h-[50px] placeholder-white font-[300]",
+            classNameInput: "bg-[#ff9800] mt-2 rounded-lg text-white pl-2 h-[50px] placeholder-white font-[300]",
             classNameLabel: "ml-2 text-[#795300] font-[400]",
         }
     ]
