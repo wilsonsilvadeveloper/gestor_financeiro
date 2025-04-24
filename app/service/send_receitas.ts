@@ -1,5 +1,5 @@
 export const sendReceitas = async (data: Record<string, string | number | boolean>) => {
-    const url = process.env.NODE_ENV === 'production' ? process.env.BACKEND_URL : 'http://localhost:3001'
+    const url = process.env.NEXT_PUBLIC_NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_BACKEND_URL : 'http://localhost:3001'
     const response = await fetch(`${url}/api/receitas`, {
         method: "POST",
         body: JSON.stringify(data),

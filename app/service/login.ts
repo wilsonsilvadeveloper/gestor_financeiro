@@ -1,5 +1,5 @@
 const Login = async (email: string, password: string) => {
-    const url = process.env.NODE_ENV === 'production' ? process.env.BACKEND_URL : 'http://localhost:3001'
+    const url = process.env.NEXT_PUBLIC_NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_BACKEND_URL : 'http://localhost:3001'
     const response = await fetch(`${url}/api/users/login`, {
         method: 'POST',
         credentials: 'include',
