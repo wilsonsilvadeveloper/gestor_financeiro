@@ -14,7 +14,8 @@
     useEffect(() => {
       const fetchDataDashboard = async () => {
         try {
-          const response = await fetch("http://localhost:3001/api/users/dashboard", {
+          const url = process.env.NEXT_PUBLIC_NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_BACKEND_URL : 'http://localhost:3001'
+          const response = await fetch(`${url}/api/users/dashboard`, {
             method: "GET",
             credentials: "include",
             headers: {
