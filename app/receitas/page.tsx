@@ -78,7 +78,7 @@ export default function Receitas() {
 
     const fields: Field[] = [
         {
-            name: "name_banco",
+            name: "name_bank",
             label: "Nome do Banco",
             type: "text",
             required: true,
@@ -87,7 +87,7 @@ export default function Receitas() {
             classNameLabel: "ml-2 text-[#795300] font-[400]",
         },
         {
-            name: "valor",
+            name: "value",
             label: "Valor",
             type: "text",
             onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -99,7 +99,7 @@ export default function Receitas() {
             classNameLabel: "ml-2 text-[#795300] font-[400]",
         },
         {
-            name: "categoria",
+            name: "category",
             label: "Categoria",
             type: "select",
             options: categorias.map((categoria) => ({ label: categoria.label, value: categoria.value, className: "bg-[#c39200] mb-4 rounded-lg text-blue pl-2 h-[30px] placeholder-white font-[300]"})),
@@ -110,7 +110,7 @@ export default function Receitas() {
             classNameLabel: "ml-2 text-[#795300] font-[400]",
         },
         {
-            name: "descricao",
+            name: "description",
             label: "Descrição",
             type: "text",
             required: true,
