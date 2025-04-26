@@ -42,7 +42,7 @@ export default function Form({ fields, onSubmit, buttonChildren, buttonText = "E
                             className={fields.className}
                         />
                     ) : fields.type === "select" && fields.options ? (
-                        <select name={fields.name} required={fields.required} onChange={handleChange} className={fields.classNameSelect}>
+                        <select name={fields.name} value={formData[fields.name].toString() || ''} required={fields.required} onChange={handleChange} className={fields.classNameSelect}>
                             <option disabled value="">Selecione</option>
                             {fields.options.map((option)=> (
                                 <option className={option.className} key={option.value} value={option.value}>
